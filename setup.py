@@ -10,6 +10,16 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 # The file is PEP 440 compliant:
 # https://www.python.org/dev/peps/pep-0440/
 
+install_requires = [
+    'numpy',
+    'neo'
+]
+
+dependency_links = [
+    'git+https://github.com/CINPLA/exdir.git',
+    'git+https://github.com/caniko2/read_exdir.git'
+]
+
 setup(
     name='read_exdir',
     version='0.1',
@@ -26,6 +36,8 @@ setup(
         'License :: MIT',
         'Programming Language :: Python :: 3',
     ],
+    install_requires=install_requires,
+    dependency_links=dependency_links,
     packages=find_packages(),
     python_requires='>=3.6',
     project_urls={

@@ -1,3 +1,4 @@
+import quantities as pq
 import numpy as np
 import pathlib
 
@@ -7,7 +8,7 @@ import neo
 import exdir.plugins.quantities
 import exdir
 
-from .auxilary import read_epoch
+from .auxiliary import read_epoch
 
 
 def get_network_events(data_path, session_id=None):
@@ -24,7 +25,13 @@ def get_network_events(data_path, session_id=None):
     else:
         msg = 'session_id has to be string or integer'
         raise ValueError(msg)
-    event_dir = session / 'experiment1' / 'recording1' / 'events/Network_Events-120.0' / 'TEXT_group_1'
+
+    event_dir = data_path / session / 'experiment1' / 'recording1' / 'events/Network_Events-120.0' / 'TEXT_group_1'
+    return (
+        np.load(event_dir / 'text.npy').astype(str),
+        np.load(event_dir / 'timestamp.npy').astype(int),
+        np.load(event_dir / 'metadata.npy').astype(int)
+    )
 
 
 def load_lfp(data_path):
